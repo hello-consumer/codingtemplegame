@@ -63,7 +63,7 @@ canvas.style.display = "none";
 var context = canvas.getContext("2d");
 context.canvas.height = window.innerHeight;
 context.canvas.width = window.innerWidth;
-canvas.style.backgroundColor = "black";
+//canvas.style.backgroundColor = "black";
 
 window.addEventListener("resize", function(){
     context.canvas.height = window.innerHeight;
@@ -86,6 +86,10 @@ function redraw(){
     skeleton.addEventListener("load", function(){
         context.drawImage(skeleton, sx, sy, 64, 64, dx, dy, 64, 64);
     });
+    if(u){
+        context.font = "16px monospace";
+        context.strokeText(u.email, dx - 30, dy + 80);
+    }
 }
 
 window.addEventListener("keydown", function(e){
