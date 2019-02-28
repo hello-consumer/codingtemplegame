@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Coding Temple Game</title>
+    <link href="main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <form id="register">
+        <fieldset>
+            <legend>Register</legend>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="reg_email" />
+            <label for="password">Password</label>
+            <input type="password" name="password" id="reg_password" />
+            <input type="submit" value="Register" />
+        </fieldset>
+    </form>
+    <form id="login">
+        <fieldset>
+            <legend>Login</legend>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="log_email" />
+            <label for="password">Password</label>
+            <input type="password" name="password" id="log_password" />
+            <input type="submit" value="Login" />
+        </fieldset>
+    </form>
+    <form id="logout">
+        <fieldset>
+            <legend>Logout</legend>
+            <input type="submit" value="Logout" />
+        </fieldset>
+        <a href="index.html">Go Home</a>
+    </form>
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCaksO8VqYBquRU1NNz07nEibiXDhwFEHk",
+            authDomain: "codingtemplegame.firebaseapp.com",
+            databaseURL: "https://codingtemplegame.firebaseio.com",
+            projectId: "codingtemplegame",
+            storageBucket: "",
+            messagingSenderId: "1024910673359"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="auth.js"></script>
+</body>
+
+</html>

@@ -1,10 +1,12 @@
 var body = document.querySelector("body");
 var colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+var u;
 
-
-window.firebase.database().ref('/color').once('value').then(function(snapshot){
-    body.style.backgroundColor = snapshot.val();
-})
+function initializeColor(){
+    window.firebase.database().ref('/' + u.uid + '/color').once('value').then(function(snapshot){
+        body.style.backgroundColor = snapshot.val();
+    });
+}
 
 
 body.addEventListener("click", function(e){
@@ -16,6 +18,15 @@ body.addEventListener("click", function(e){
     } else{
         newColorName = colors[currentColorPosition + 1];
     }
-    window.firebase.database().ref('/color').set(newColorName);
+    window.firebase.database().ref('/' + u.uid + '/color').set(newColorName);
     body.style.backgroundColor = newColorName;
+});
+
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+       u = user;
+       initializeColor();
+    } else{
+        window.location.href = "./authenticate.html"
+    }
 });
