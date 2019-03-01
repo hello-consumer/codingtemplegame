@@ -135,6 +135,20 @@ window.addEventListener("keydown", function(e){
             break;
         }
     }
+    if(dy < 0){
+        dy = 0;
+    }
+    if(dy + frameSize > context.canvas.height){
+        dy = context.canvas.height - frameSize;
+    }
+
+    if(dx < 0){
+        dx = 0;
+    }
+    if(dx + frameSize > context.canvas.width){
+        dx = context.canvas.width - frameSize;
+    }
+
     var skeleton = {
         sx: sx, 
         sy: sy, 
