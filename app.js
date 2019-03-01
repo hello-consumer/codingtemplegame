@@ -94,6 +94,8 @@ function redraw(){
 
     otherSkeletons.forEach(function(e){
         context.drawImage(skeleton, e.user.skeleton.sx, e.user.skeleton.sy, 64, 64, e.user.skeleton.dx, e.user.skeleton.dy, 64, 64);
+
+        context.strokeText(e.user.name || "NULL", e.user.skeleton.dx - 30, e.user.skeleton.dy + 80);
     })
 }
 
@@ -139,6 +141,7 @@ window.addEventListener("keydown", function(e){
         dx: dx, 
         dy: dy
     }
+    window.firebase.database().ref('/' + u.uid + '/name').set(u.email);
     window.firebase.database().ref('/' + u.uid + '/skeleton').set(skeleton);
     redraw();
 
