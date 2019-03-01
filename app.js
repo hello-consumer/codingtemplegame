@@ -29,6 +29,8 @@ function initializeSkeleton(){
     
 }
 
+
+
 body.addEventListener("click", function(e){
     var currentColor = body.style.backgroundColor;
     var currentColorPosition = colors.indexOf(currentColor);
@@ -76,20 +78,23 @@ var frameSize = 64;
 
 var totalXFrames = 8;
 var currentXFrame = 0;
+var skeleton = new Image();
+skeleton.src = "skeleton.png";
 
+var otherSkeletons = [];
 
 function redraw(){
     context.clearRect(0, 0, canvas.width, canvas.height);
-    var skeleton = new Image();
-    skeleton.src = "skeleton.png";
     
-    skeleton.addEventListener("load", function(){
-        context.drawImage(skeleton, sx, sy, 64, 64, dx, dy, 64, 64);
-    });
+    context.drawImage(skeleton, sx, sy, 64, 64, dx, dy, 64, 64);
     if(u){
         context.font = "16px monospace";
         context.strokeText(u.email, dx - 30, dy + 80);
     }
+
+    otherSkeletons.forEach(function(e){
+        context.drawImage(skeleton, e.user.skeleton.sx, e.user.skeleton.sy, 64, 64, e.user.skeleton.dx, e.user.skeleton.dy, 64, 64);
+    })
 }
 
 window.addEventListener("keydown", function(e){
@@ -140,3 +145,11 @@ window.addEventListener("keydown", function(e){
 })
 
 redraw();
+
+
+window.firebase.database().ref('/').on("value", function(snapshot){ 
+    console.log(snapshot.val())
+    var allUsers = snapshot.val();
+    var allUsersAsArray = Object.keys(allUsers).map(function(key){ return { user: allUsers[key], uid: key }; });
+    otherSkeletons = allUsersAsArray.filter(function(e){ return e.uid != u.uid && e.hasOwnProperty("user") && e.user.hasOwnProperty("skeleton") })
+})
