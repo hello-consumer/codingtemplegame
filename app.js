@@ -148,8 +148,8 @@ redraw();
 
 
 window.firebase.database().ref('/').on("value", function(snapshot){ 
-    console.log(snapshot.val())
     var allUsers = snapshot.val();
     var allUsersAsArray = Object.keys(allUsers).map(function(key){ return { user: allUsers[key], uid: key }; });
-    otherSkeletons = allUsersAsArray.filter(function(e){ return e.uid != u.uid && e.hasOwnProperty("user") && e.user.hasOwnProperty("skeleton") })
+    otherSkeletons = allUsersAsArray.filter(function(e){ return e.uid != u.uid && e.hasOwnProperty("user") && e.user.hasOwnProperty("skeleton") });
+    redraw();
 })
